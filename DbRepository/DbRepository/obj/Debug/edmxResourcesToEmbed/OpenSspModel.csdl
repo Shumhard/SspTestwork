@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OpenSspModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="Guid" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Birthday" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Residence" Relationship="Self.Residence_Client_fk" FromRole="Client" ToRole="Residence" />
+  </EntityType>
+  <EntityType Name="Hotel">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Housing" Relationship="Self.Housing_Hotel_fk" FromRole="Hotel" ToRole="Housing" />
+  </EntityType>
+  <EntityType Name="Housing">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="Guid" Nullable="false" />
+    <Property Name="SortNumber" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="HotelGuid" Type="Guid" />
+    <NavigationProperty Name="Hotel" Relationship="Self.Housing_Hotel_fk" FromRole="Housing" ToRole="Hotel" />
+    <NavigationProperty Name="Room" Relationship="Self.Room_Housing_fk" FromRole="Housing" ToRole="Room" />
+  </EntityType>
+  <EntityType Name="Residence">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoomGuid" Type="Guid" Nullable="false" />
+    <Property Name="ClientGuid" Type="Guid" Nullable="false" />
+    <Property Name="BeginDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Client" Relationship="Self.Residence_Client_fk" FromRole="Residence" ToRole="Client" />
+    <NavigationProperty Name="Room" Relationship="Self.Residence_Room_fk" FromRole="Residence" ToRole="Room" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="Guid" />
+    </Key>
+    <Property Name="Guid" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="CostPerDay" Type="Double" />
+    <Property Name="CostService" Type="Double" />
+    <Property Name="HousingGuid" Type="Guid" />
+    <NavigationProperty Name="Housing" Relationship="Self.Room_Housing_fk" FromRole="Room" ToRole="Housing" />
+    <NavigationProperty Name="Residence" Relationship="Self.Residence_Room_fk" FromRole="Room" ToRole="Residence" />
+  </EntityType>
+  <Association Name="Residence_Client_fk">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Residence" Type="Self.Residence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="Residence">
+        <PropertyRef Name="ClientGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Housing_Hotel_fk">
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+    <End Role="Housing" Type="Self.Housing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="Housing">
+        <PropertyRef Name="HotelGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Room_Housing_fk">
+    <End Role="Housing" Type="Self.Housing" Multiplicity="0..1" />
+    <End Role="Room" Type="Self.Room" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Housing">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="Room">
+        <PropertyRef Name="HousingGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Residence_Room_fk">
+    <End Role="Room" Type="Self.Room" Multiplicity="1" />
+    <End Role="Residence" Type="Self.Residence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="Guid" />
+      </Principal>
+      <Dependent Role="Residence">
+        <PropertyRef Name="RoomGuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OpenSspContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Client" EntityType="Self.Client" />
+    <EntitySet Name="Hotel" EntityType="Self.Hotel" />
+    <EntitySet Name="Housing" EntityType="Self.Housing" />
+    <EntitySet Name="Residence" EntityType="Self.Residence" />
+    <EntitySet Name="Room" EntityType="Self.Room" />
+    <AssociationSet Name="Residence_Client_fk" Association="Self.Residence_Client_fk">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Residence" EntitySet="Residence" />
+    </AssociationSet>
+    <AssociationSet Name="Housing_Hotel_fk" Association="Self.Housing_Hotel_fk">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="Housing" EntitySet="Housing" />
+    </AssociationSet>
+    <AssociationSet Name="Room_Housing_fk" Association="Self.Room_Housing_fk">
+      <End Role="Housing" EntitySet="Housing" />
+      <End Role="Room" EntitySet="Room" />
+    </AssociationSet>
+    <AssociationSet Name="Residence_Room_fk" Association="Self.Residence_Room_fk">
+      <End Role="Room" EntitySet="Room" />
+      <End Role="Residence" EntitySet="Residence" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

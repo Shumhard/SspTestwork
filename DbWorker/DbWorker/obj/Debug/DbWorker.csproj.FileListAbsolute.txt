@@ -1,0 +1,14 @@
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbWorker\DbWorker\obj\Debug\DbWorker.csprojResolveAssemblyReference.cache
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbWorker\DbWorker\bin\Debug\DbWorker.dll.config
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbWorker\DbWorker\bin\Debug\DbWorker.dll
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbWorker\DbWorker\bin\Debug\DbWorker.pdb
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbWorker\DbWorker\bin\Debug\Common.dll
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbWorker\DbWorker\bin\Debug\DbRepository.dll
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbWorker\DbWorker\bin\Debug\EntityFramework.dll
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbWorker\DbWorker\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbWorker\DbWorker\bin\Debug\Common.pdb
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbWorker\DbWorker\bin\Debug\DbRepository.pdb
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbWorker\DbWorker\bin\Debug\EntityFramework.xml
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbWorker\DbWorker\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbWorker\DbWorker\obj\Debug\DbWorker.dll
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbWorker\DbWorker\obj\Debug\DbWorker.pdb

@@ -1,0 +1,10 @@
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbRepository\DbRepository\bin\Debug\DbRepository.dll.config
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbRepository\DbRepository\bin\Debug\DbRepository.dll
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbRepository\DbRepository\bin\Debug\DbRepository.pdb
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbRepository\DbRepository\bin\Debug\EntityFramework.dll
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbRepository\DbRepository\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbRepository\DbRepository\bin\Debug\EntityFramework.xml
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbRepository\DbRepository\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbRepository\DbRepository\obj\Debug\DbRepository.csprojResolveAssemblyReference.cache
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbRepository\DbRepository\obj\Debug\DbRepository.dll
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\DbRepository\DbRepository\obj\Debug\DbRepository.pdb

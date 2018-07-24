@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OpenSspModelStoreContainer" CdmEntityContainer="OpenSspContext">
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="OpenSspModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hotel">
+      <EntityTypeMapping TypeName="OpenSspModel.Hotel">
+        <MappingFragment StoreEntitySet="Hotel">
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Housing">
+      <EntityTypeMapping TypeName="OpenSspModel.Housing">
+        <MappingFragment StoreEntitySet="Housing">
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+          <ScalarProperty Name="SortNumber" ColumnName="SortNumber" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="HotelGuid" ColumnName="HotelGuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Residence">
+      <EntityTypeMapping TypeName="OpenSspModel.Residence">
+        <MappingFragment StoreEntitySet="Residence">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RoomGuid" ColumnName="RoomGuid" />
+          <ScalarProperty Name="ClientGuid" ColumnName="ClientGuid" />
+          <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Room">
+      <EntityTypeMapping TypeName="OpenSspModel.Room">
+        <MappingFragment StoreEntitySet="Room">
+          <ScalarProperty Name="Guid" ColumnName="Guid" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CostPerDay" ColumnName="CostPerDay" />
+          <ScalarProperty Name="CostService" ColumnName="CostService" />
+          <ScalarProperty Name="HousingGuid" ColumnName="HousingGuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

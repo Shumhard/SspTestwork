@@ -1,0 +1,5 @@
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\Common\Common\bin\Debug\Common.dll
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\Common\Common\bin\Debug\Common.pdb
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\Common\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\Common\Common\obj\Debug\Common.dll
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\Common\Common\obj\Debug\Common.pdb

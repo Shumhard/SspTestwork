@@ -11,7 +11,7 @@ namespace DbWorker
     {
         public static Hotel GetHotel(Guid hotelGuid)
         {
-            using (var context = new DbRepository.OpenSspEntities())
+            using (var context = new DbRepository.OpenSspContext())
             {
                 var hotel = new Hotel();
 
@@ -26,13 +26,13 @@ namespace DbWorker
                 hotel.Address = dbHotel.Address;
                 hotel.Buildings = new List<Building>();
 
-                foreach(var dbBuilding in dbHotel.Building)
+                foreach(var dbBuilding in dbHotel.Housing)
                 {
                     var building = new Building
                     {
                         Guid = dbBuilding.Guid,
                         Name = dbBuilding.Name,
-                        SortNumber = dbBuilding.SortNumber,
+                        SortNumber = (int)dbBuilding.SortNumber,
                         Rooms = new List<Room>()
                     };
 
@@ -58,22 +58,22 @@ namespace DbWorker
 
         public static OperationResult AddBuilding(Guid hotelGuid, string name)
         {
-            using (var context = new DbRepository.OpenSspEntities())
+            using (var context = new DbRepository.OpenSspContext())
             {
-                var dbBuilding = context.Building.FirstOrDefault(x => x.HotelGuid == hotelGuid && x.Name == name);
+                var dbBuilding = context.Housing.FirstOrDefault(x => x.HotelGuid == hotelGuid && x.Name == name);
                 if(dbBuilding != null)
                 {
                     return OperationResult.DuplicateNameError;
                 }
 
-                dbBuilding = new DbRepository.Building
-                {
-                    Guid = Guid.NewGuid(),
-                    Name = name,
-                    SortNumber = context.Building.Count(),
-                    HotelGuid = hotelGuid
-                };
-                context.Building.Add(dbBuilding);
+                //dbBuilding = new DbRepository.Housing();
+                //{
+                //    Guid = Guid.NewGuid(),
+                //    Name = name,
+                //    SortNumber = context.Building.Count(),
+                //    HotelGuid = hotelGuid
+                //};
+                //context.Building.Add(dbBuilding);
 
                 context.SaveChanges();
 
