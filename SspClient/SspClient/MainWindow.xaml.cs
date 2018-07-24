@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ServiceRequest;
+using SspClient.Helpers;
+using SspClient.ServiceWorker;
 
 namespace SspClient
 {
@@ -23,6 +26,13 @@ namespace SspClient
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private async void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var serviceWorker = DIFactory.Resolve<IServiceWorker>();
+            var result = await serviceWorker.GetHotel(new GetHotelRequest());
+            var st = result.Status;
         }
     }
 }

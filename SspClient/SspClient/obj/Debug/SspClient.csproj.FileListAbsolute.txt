@@ -1,1 +1,23 @@
 c:\users\shumhard\documents\visual studio 2015\Projects\SspClient\SspClient\bin\Debug\SspClient.exe.config
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\bin\Debug\SspClient.exe.config
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\bin\Debug\SspClient.exe
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\bin\Debug\SspClient.pdb
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\bin\Debug\Common.dll
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\bin\Debug\Newtonsoft.Json.dll
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\bin\Debug\Ninject.dll
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\bin\Debug\Common.pdb
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\bin\Debug\Newtonsoft.Json.xml
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\bin\Debug\Ninject.xml
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\obj\Debug\SspClient.csprojResolveAssemblyReference.cache
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\obj\Debug\MainWindow.g.cs
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\obj\Debug\TreeControl.g.cs
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\obj\Debug\App.g.cs
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\obj\Debug\SspClient_MarkupCompile.cache
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\obj\Debug\SspClient_MarkupCompile.lref
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\obj\Debug\MainWindow.baml
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\obj\Debug\TreeControl.baml
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\obj\Debug\SspClient.g.resources
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\obj\Debug\SspClient.Properties.Resources.resources
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\obj\Debug\SspClient.csproj.GenerateResource.Cache
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\obj\Debug\SspClient.exe
+C:\Users\shumihinvs\Documents\GitHub\SspTestwork\SspClient\SspClient\obj\Debug\SspClient.pdb

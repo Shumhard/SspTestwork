@@ -47,11 +47,12 @@
     <Compile Include="Classes\Hotel\RoomStatus.cs" />
     <Compile Include="Classes\OperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceRequest\GetHotelRequest.cs" />
+    <Compile Include="ServiceResult\Common\ResultBody.cs" />
+    <Compile Include="ServiceResult\GetHotelResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Classes\Client\" />
-    <Folder Include="ServiceRequest\" />
-    <Folder Include="ServiceResult\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
