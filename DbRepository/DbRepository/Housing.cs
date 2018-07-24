@@ -12,16 +12,16 @@ namespace DbRepository
     using System;
     using System.Collections.Generic;
     
-    public partial class Building
+    public partial class Housing
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Building()
+        public Housing()
         {
             this.Room = new HashSet<Room>();
         }
     
         public System.Guid Guid { get; set; }
-        public int SortNumber { get; set; }
+        public Nullable<int> SortNumber { get; set; }
         public string Name { get; set; }
         public Nullable<System.Guid> HotelGuid { get; set; }
     

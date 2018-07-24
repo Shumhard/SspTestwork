@@ -10,19 +10,10 @@
             <PropertyRef Name="Guid" />
           </Key>
           <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="FirstName" Type="varchar" MaxLength="100" />
-          <Property Name="LastName" Type="varchar" MaxLength="100" />
-          <Property Name="MiddleName" Type="varchar" MaxLength="100" />
+          <Property Name="FirstName" Type="varchar" MaxLength="200" />
+          <Property Name="LastName" Type="varchar" MaxLength="200" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="200" />
           <Property Name="Birthday" Type="date" />
-        </EntityType>
-        <EntityType Name="Building">
-          <Key>
-            <PropertyRef Name="Guid" />
-          </Key>
-          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SortNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="200" />
-          <Property Name="HotelGuid" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="Hotel">
           <Key>
@@ -32,6 +23,15 @@
           <Property Name="Name" Type="varchar" MaxLength="200" />
           <Property Name="Address" Type="varchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="Housing">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SortNumber" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="HotelGuid" Type="uniqueidentifier" />
+        </EntityType>
         <EntityType Name="Residence">
           <Key>
             <PropertyRef Name="Id" />
@@ -39,27 +39,28 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoomGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ClientGuid" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ArrivalDate" Type="datetime" />
-          <Property Name="DischargeDate" Type="datetime" />
+          <Property Name="BeginDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
             <PropertyRef Name="Guid" />
           </Key>
           <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
           <Property Name="Status" Type="int" />
           <Property Name="CostPerDay" Type="float" />
           <Property Name="CostService" Type="float" />
-          <Property Name="BuildingGuid" Type="uniqueidentifier" />
+          <Property Name="HousingGuid" Type="uniqueidentifier" />
         </EntityType>
-        <Association Name="Building_Hotel_fk">
+        <Association Name="Housing_Hotel_fk">
           <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
-          <End Role="Building" Type="Self.Building" Multiplicity="*" />
+          <End Role="Housing" Type="Self.Housing" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Hotel">
               <PropertyRef Name="Guid" />
             </Principal>
-            <Dependent Role="Building">
+            <Dependent Role="Housing">
               <PropertyRef Name="HotelGuid" />
             </Dependent>
           </ReferentialConstraint>
@@ -88,27 +89,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Room_Building_fk">
-          <End Role="Building" Type="Self.Building" Multiplicity="0..1" />
+        <Association Name="Room_Housing_fk">
+          <End Role="Housing" Type="Self.Housing" Multiplicity="0..1" />
           <End Role="Room" Type="Self.Room" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Building">
+            <Principal Role="Housing">
               <PropertyRef Name="Guid" />
             </Principal>
             <Dependent Role="Room">
-              <PropertyRef Name="BuildingGuid" />
+              <PropertyRef Name="HousingGuid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="OpenSspModelStoreContainer">
           <EntitySet Name="Client" EntityType="Self.Client" Schema="Client" store:Type="Tables" />
-          <EntitySet Name="Building" EntityType="Self.Building" Schema="Hotel" store:Type="Tables" />
           <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="Hotel" store:Type="Tables" />
+          <EntitySet Name="Housing" EntityType="Self.Housing" Schema="Hotel" store:Type="Tables" />
           <EntitySet Name="Residence" EntityType="Self.Residence" Schema="Hotel" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="Hotel" store:Type="Tables" />
-          <AssociationSet Name="Building_Hotel_fk" Association="Self.Building_Hotel_fk">
+          <AssociationSet Name="Housing_Hotel_fk" Association="Self.Housing_Hotel_fk">
             <End Role="Hotel" EntitySet="Hotel" />
-            <End Role="Building" EntitySet="Building" />
+            <End Role="Housing" EntitySet="Housing" />
           </AssociationSet>
           <AssociationSet Name="Residence_Client_fk" Association="Self.Residence_Client_fk">
             <End Role="Client" EntitySet="Client" />
@@ -118,8 +119,8 @@
             <End Role="Room" EntitySet="Room" />
             <End Role="Residence" EntitySet="Residence" />
           </AssociationSet>
-          <AssociationSet Name="Room_Building_fk" Association="Self.Room_Building_fk">
-            <End Role="Building" EntitySet="Building" />
+          <AssociationSet Name="Room_Housing_fk" Association="Self.Room_Housing_fk">
+            <End Role="Housing" EntitySet="Housing" />
             <End Role="Room" EntitySet="Room" />
           </AssociationSet>
         </EntityContainer>
@@ -133,22 +134,11 @@
             <PropertyRef Name="Guid" />
           </Key>
           <Property Name="Guid" Type="Guid" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Birthday" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Residence" Relationship="Self.Residence_Client_fk" FromRole="Client" ToRole="Residence" />
-        </EntityType>
-        <EntityType Name="Building">
-          <Key>
-            <PropertyRef Name="Guid" />
-          </Key>
-          <Property Name="Guid" Type="Guid" Nullable="false" />
-          <Property Name="SortNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="HotelGuid" Type="Guid" />
-          <NavigationProperty Name="Hotel" Relationship="Self.Building_Hotel_fk" FromRole="Building" ToRole="Hotel" />
-          <NavigationProperty Name="Room" Relationship="Self.Room_Building_fk" FromRole="Building" ToRole="Room" />
         </EntityType>
         <EntityType Name="Hotel">
           <Key>
@@ -157,7 +147,18 @@
           <Property Name="Guid" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Building" Relationship="Self.Building_Hotel_fk" FromRole="Hotel" ToRole="Building" />
+          <NavigationProperty Name="Housing" Relationship="Self.Housing_Hotel_fk" FromRole="Hotel" ToRole="Housing" />
+        </EntityType>
+        <EntityType Name="Housing">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="SortNumber" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="HotelGuid" Type="Guid" />
+          <NavigationProperty Name="Hotel" Relationship="Self.Housing_Hotel_fk" FromRole="Housing" ToRole="Hotel" />
+          <NavigationProperty Name="Room" Relationship="Self.Room_Housing_fk" FromRole="Housing" ToRole="Room" />
         </EntityType>
         <EntityType Name="Residence">
           <Key>
@@ -166,8 +167,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoomGuid" Type="Guid" Nullable="false" />
           <Property Name="ClientGuid" Type="Guid" Nullable="false" />
-          <Property Name="ArrivalDate" Type="DateTime" Precision="3" />
-          <Property Name="DischargeDate" Type="DateTime" Precision="3" />
+          <Property Name="BeginDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Client" Relationship="Self.Residence_Client_fk" FromRole="Residence" ToRole="Client" />
           <NavigationProperty Name="Room" Relationship="Self.Residence_Room_fk" FromRole="Residence" ToRole="Room" />
         </EntityType>
@@ -176,11 +177,12 @@
             <PropertyRef Name="Guid" />
           </Key>
           <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Int32" />
           <Property Name="CostPerDay" Type="Double" />
           <Property Name="CostService" Type="Double" />
-          <Property Name="BuildingGuid" Type="Guid" />
-          <NavigationProperty Name="Building" Relationship="Self.Room_Building_fk" FromRole="Room" ToRole="Building" />
+          <Property Name="HousingGuid" Type="Guid" />
+          <NavigationProperty Name="Housing" Relationship="Self.Room_Housing_fk" FromRole="Room" ToRole="Housing" />
           <NavigationProperty Name="Residence" Relationship="Self.Residence_Room_fk" FromRole="Room" ToRole="Residence" />
         </EntityType>
         <Association Name="Residence_Client_fk">
@@ -195,27 +197,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Building_Hotel_fk">
+        <Association Name="Housing_Hotel_fk">
           <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
-          <End Role="Building" Type="Self.Building" Multiplicity="*" />
+          <End Role="Housing" Type="Self.Housing" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Hotel">
               <PropertyRef Name="Guid" />
             </Principal>
-            <Dependent Role="Building">
+            <Dependent Role="Housing">
               <PropertyRef Name="HotelGuid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Room_Building_fk">
-          <End Role="Building" Type="Self.Building" Multiplicity="0..1" />
+        <Association Name="Room_Housing_fk">
+          <End Role="Housing" Type="Self.Housing" Multiplicity="0..1" />
           <End Role="Room" Type="Self.Room" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Building">
+            <Principal Role="Housing">
               <PropertyRef Name="Guid" />
             </Principal>
             <Dependent Role="Room">
-              <PropertyRef Name="BuildingGuid" />
+              <PropertyRef Name="HousingGuid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -231,22 +233,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="OpenSspEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="OpenSspContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Client" EntityType="Self.Client" />
-          <EntitySet Name="Building" EntityType="Self.Building" />
           <EntitySet Name="Hotel" EntityType="Self.Hotel" />
+          <EntitySet Name="Housing" EntityType="Self.Housing" />
           <EntitySet Name="Residence" EntityType="Self.Residence" />
           <EntitySet Name="Room" EntityType="Self.Room" />
           <AssociationSet Name="Residence_Client_fk" Association="Self.Residence_Client_fk">
             <End Role="Client" EntitySet="Client" />
             <End Role="Residence" EntitySet="Residence" />
           </AssociationSet>
-          <AssociationSet Name="Building_Hotel_fk" Association="Self.Building_Hotel_fk">
+          <AssociationSet Name="Housing_Hotel_fk" Association="Self.Housing_Hotel_fk">
             <End Role="Hotel" EntitySet="Hotel" />
-            <End Role="Building" EntitySet="Building" />
+            <End Role="Housing" EntitySet="Housing" />
           </AssociationSet>
-          <AssociationSet Name="Room_Building_fk" Association="Self.Room_Building_fk">
-            <End Role="Building" EntitySet="Building" />
+          <AssociationSet Name="Room_Housing_fk" Association="Self.Room_Housing_fk">
+            <End Role="Housing" EntitySet="Housing" />
             <End Role="Room" EntitySet="Room" />
           </AssociationSet>
           <AssociationSet Name="Residence_Room_fk" Association="Self.Residence_Room_fk">
@@ -259,7 +261,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="OpenSspModelStoreContainer" CdmEntityContainer="OpenSspEntities">
+        <EntityContainerMapping StorageEntityContainer="OpenSspModelStoreContainer" CdmEntityContainer="OpenSspContext">
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="OpenSspModel.Client">
               <MappingFragment StoreEntitySet="Client">
@@ -268,16 +270,6 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Building">
-            <EntityTypeMapping TypeName="OpenSspModel.Building">
-              <MappingFragment StoreEntitySet="Building">
-                <ScalarProperty Name="Guid" ColumnName="Guid" />
-                <ScalarProperty Name="SortNumber" ColumnName="SortNumber" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="HotelGuid" ColumnName="HotelGuid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -290,14 +282,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Housing">
+            <EntityTypeMapping TypeName="OpenSspModel.Housing">
+              <MappingFragment StoreEntitySet="Housing">
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="SortNumber" ColumnName="SortNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="HotelGuid" ColumnName="HotelGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Residence">
             <EntityTypeMapping TypeName="OpenSspModel.Residence">
               <MappingFragment StoreEntitySet="Residence">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="RoomGuid" ColumnName="RoomGuid" />
                 <ScalarProperty Name="ClientGuid" ColumnName="ClientGuid" />
-                <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
-                <ScalarProperty Name="DischargeDate" ColumnName="DischargeDate" />
+                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -305,10 +307,11 @@
             <EntityTypeMapping TypeName="OpenSspModel.Room">
               <MappingFragment StoreEntitySet="Room">
                 <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CostPerDay" ColumnName="CostPerDay" />
                 <ScalarProperty Name="CostService" ColumnName="CostService" />
-                <ScalarProperty Name="BuildingGuid" ColumnName="BuildingGuid" />
+                <ScalarProperty Name="HousingGuid" ColumnName="HousingGuid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

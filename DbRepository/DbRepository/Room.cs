@@ -25,9 +25,9 @@ namespace DbRepository
         public Nullable<int> Status { get; set; }
         public Nullable<double> CostPerDay { get; set; }
         public Nullable<double> CostService { get; set; }
-        public Nullable<System.Guid> BuildingGuid { get; set; }
+        public Nullable<System.Guid> HousingGuid { get; set; }
     
-        public virtual Building Building { get; set; }
+        public virtual Housing Housing { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Residence> Residence { get; set; }
     }

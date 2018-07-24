@@ -17,8 +17,8 @@ namespace DbRepository
         public int Id { get; set; }
         public System.Guid RoomGuid { get; set; }
         public System.Guid ClientGuid { get; set; }
-        public Nullable<System.DateTime> ArrivalDate { get; set; }
-        public Nullable<System.DateTime> DischargeDate { get; set; }
+        public Nullable<System.DateTime> BeginDate { get; set; }
+        public Nullable<System.DateTime> EndDate { get; set; }
     
         public virtual Client Client { get; set; }
         public virtual Room Room { get; set; }

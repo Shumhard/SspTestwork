@@ -13,10 +13,10 @@ namespace DbRepository
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class OpenSspEntities : DbContext
+    public partial class OpenSspContext : DbContext
     {
-        public OpenSspEntities()
-            : base("name=OpenSspEntities")
+        public OpenSspContext()
+            : base("name=OpenSspContext")
         {
         }
     
@@ -26,8 +26,8 @@ namespace DbRepository
         }
     
         public virtual DbSet<Client> Client { get; set; }
-        public virtual DbSet<Building> Building { get; set; }
         public virtual DbSet<Hotel> Hotel { get; set; }
+        public virtual DbSet<Housing> Housing { get; set; }
         public virtual DbSet<Residence> Residence { get; set; }
         public virtual DbSet<Room> Room { get; set; }
     }

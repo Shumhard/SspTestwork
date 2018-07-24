@@ -17,7 +17,7 @@ namespace DbRepository
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Hotel()
         {
-            this.Building = new HashSet<Building>();
+            this.Housing = new HashSet<Housing>();
         }
     
         public System.Guid Guid { get; set; }
@@ -25,6 +25,6 @@ namespace DbRepository
         public string Address { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Building> Building { get; set; }
+        public virtual ICollection<Housing> Housing { get; set; }
     }
 }
