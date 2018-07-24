@@ -1,0 +1,1 @@
+c:\users\shumhard\documents\visual studio 2015\Projects\SspClient\SspClient\bin\Debug\SspClient.exe.config

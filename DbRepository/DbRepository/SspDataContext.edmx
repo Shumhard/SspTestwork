@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OpenSspModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="100" />
+          <Property Name="Birthday" Type="date" />
+        </EntityType>
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SortNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="HotelGuid" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="Address" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Residence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ClientGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ArrivalDate" Type="datetime" />
+          <Property Name="DischargeDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Status" Type="int" />
+          <Property Name="CostPerDay" Type="float" />
+          <Property Name="CostService" Type="float" />
+          <Property Name="BuildingGuid" Type="uniqueidentifier" />
+        </EntityType>
+        <Association Name="Building_Hotel_fk">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+          <End Role="Building" Type="Self.Building" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Building">
+              <PropertyRef Name="HotelGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Residence_Client_fk">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Residence" Type="Self.Residence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Residence">
+              <PropertyRef Name="ClientGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Residence_Room_fk">
+          <End Role="Room" Type="Self.Room" Multiplicity="1" />
+          <End Role="Residence" Type="Self.Residence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Residence">
+              <PropertyRef Name="RoomGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Room_Building_fk">
+          <End Role="Building" Type="Self.Building" Multiplicity="0..1" />
+          <End Role="Room" Type="Self.Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Room">
+              <PropertyRef Name="BuildingGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OpenSspModelStoreContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="Client" store:Type="Tables" />
+          <EntitySet Name="Building" EntityType="Self.Building" Schema="Hotel" store:Type="Tables" />
+          <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="Hotel" store:Type="Tables" />
+          <EntitySet Name="Residence" EntityType="Self.Residence" Schema="Hotel" store:Type="Tables" />
+          <EntitySet Name="Room" EntityType="Self.Room" Schema="Hotel" store:Type="Tables" />
+          <AssociationSet Name="Building_Hotel_fk" Association="Self.Building_Hotel_fk">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="Building" EntitySet="Building" />
+          </AssociationSet>
+          <AssociationSet Name="Residence_Client_fk" Association="Self.Residence_Client_fk">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Residence" EntitySet="Residence" />
+          </AssociationSet>
+          <AssociationSet Name="Residence_Room_fk" Association="Self.Residence_Room_fk">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="Residence" EntitySet="Residence" />
+          </AssociationSet>
+          <AssociationSet Name="Room_Building_fk" Association="Self.Room_Building_fk">
+            <End Role="Building" EntitySet="Building" />
+            <End Role="Room" EntitySet="Room" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OpenSspModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Residence" Relationship="Self.Residence_Client_fk" FromRole="Client" ToRole="Residence" />
+        </EntityType>
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="SortNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="HotelGuid" Type="Guid" />
+          <NavigationProperty Name="Hotel" Relationship="Self.Building_Hotel_fk" FromRole="Building" ToRole="Hotel" />
+          <NavigationProperty Name="Room" Relationship="Self.Room_Building_fk" FromRole="Building" ToRole="Room" />
+        </EntityType>
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Building" Relationship="Self.Building_Hotel_fk" FromRole="Hotel" ToRole="Building" />
+        </EntityType>
+        <EntityType Name="Residence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomGuid" Type="Guid" Nullable="false" />
+          <Property Name="ClientGuid" Type="Guid" Nullable="false" />
+          <Property Name="ArrivalDate" Type="DateTime" Precision="3" />
+          <Property Name="DischargeDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Client" Relationship="Self.Residence_Client_fk" FromRole="Residence" ToRole="Client" />
+          <NavigationProperty Name="Room" Relationship="Self.Residence_Room_fk" FromRole="Residence" ToRole="Room" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="Guid" />
+          </Key>
+          <Property Name="Guid" Type="Guid" Nullable="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CostPerDay" Type="Double" />
+          <Property Name="CostService" Type="Double" />
+          <Property Name="BuildingGuid" Type="Guid" />
+          <NavigationProperty Name="Building" Relationship="Self.Room_Building_fk" FromRole="Room" ToRole="Building" />
+          <NavigationProperty Name="Residence" Relationship="Self.Residence_Room_fk" FromRole="Room" ToRole="Residence" />
+        </EntityType>
+        <Association Name="Residence_Client_fk">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Residence" Type="Self.Residence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Residence">
+              <PropertyRef Name="ClientGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Building_Hotel_fk">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+          <End Role="Building" Type="Self.Building" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Building">
+              <PropertyRef Name="HotelGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Room_Building_fk">
+          <End Role="Building" Type="Self.Building" Multiplicity="0..1" />
+          <End Role="Room" Type="Self.Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Room">
+              <PropertyRef Name="BuildingGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Residence_Room_fk">
+          <End Role="Room" Type="Self.Room" Multiplicity="1" />
+          <End Role="Residence" Type="Self.Residence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="Guid" />
+            </Principal>
+            <Dependent Role="Residence">
+              <PropertyRef Name="RoomGuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OpenSspEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Building" EntityType="Self.Building" />
+          <EntitySet Name="Hotel" EntityType="Self.Hotel" />
+          <EntitySet Name="Residence" EntityType="Self.Residence" />
+          <EntitySet Name="Room" EntityType="Self.Room" />
+          <AssociationSet Name="Residence_Client_fk" Association="Self.Residence_Client_fk">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Residence" EntitySet="Residence" />
+          </AssociationSet>
+          <AssociationSet Name="Building_Hotel_fk" Association="Self.Building_Hotel_fk">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="Building" EntitySet="Building" />
+          </AssociationSet>
+          <AssociationSet Name="Room_Building_fk" Association="Self.Room_Building_fk">
+            <End Role="Building" EntitySet="Building" />
+            <End Role="Room" EntitySet="Room" />
+          </AssociationSet>
+          <AssociationSet Name="Residence_Room_fk" Association="Self.Residence_Room_fk">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="Residence" EntitySet="Residence" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OpenSspModelStoreContainer" CdmEntityContainer="OpenSspEntities">
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="OpenSspModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Building">
+            <EntityTypeMapping TypeName="OpenSspModel.Building">
+              <MappingFragment StoreEntitySet="Building">
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="SortNumber" ColumnName="SortNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="HotelGuid" ColumnName="HotelGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hotel">
+            <EntityTypeMapping TypeName="OpenSspModel.Hotel">
+              <MappingFragment StoreEntitySet="Hotel">
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Residence">
+            <EntityTypeMapping TypeName="OpenSspModel.Residence">
+              <MappingFragment StoreEntitySet="Residence">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoomGuid" ColumnName="RoomGuid" />
+                <ScalarProperty Name="ClientGuid" ColumnName="ClientGuid" />
+                <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
+                <ScalarProperty Name="DischargeDate" ColumnName="DischargeDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Room">
+            <EntityTypeMapping TypeName="OpenSspModel.Room">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CostPerDay" ColumnName="CostPerDay" />
+                <ScalarProperty Name="CostService" ColumnName="CostService" />
+                <ScalarProperty Name="BuildingGuid" ColumnName="BuildingGuid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
